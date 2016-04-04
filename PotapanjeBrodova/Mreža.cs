@@ -9,37 +9,27 @@ namespace PotapanjeBrodova
     {
         public Mreža(int redaka, int stupaca)
         {
-            this.redaka = redaka;
-            this.stupaca = stupaca;
-            polja = new Polje[redaka, stupaca];
+            Redaka = redaka;
+            Stupaca = stupaca;
             for (int r = 0; r < redaka; ++r)
             {
                 for (int s = 0; s < stupaca; ++s)
-                    polja[r, s] = new Polje(r, s);
+                    polja.Add(new Polje(r, s));
             }
         }
 
-        public List<Polje> DajSlobodnaPolja()
+        public IEnumerable<Polje> DajSlobodnaPolja()
         {
-            List<Polje> slobodnaPolja = new List<Polje>();
-            for (int r = 0; r < redaka; ++r)
-            {
-                for (int s = 0; s < stupaca; ++s)
-                {
-                    if (polja[r, s] != null)
-                        slobodnaPolja.Add(polja[r, s]);
-                }
-            }
-            return slobodnaPolja;
+            return polja;
         }
 
-        public void EliminirajPolje(int redak, int stupac)
+        public void EliminirajPolje(Polje p)
         {
-            polja[redak, stupac] = null;
+            polja.Remove(p);
         }
 
-        private Polje[,] polja;
-        private int redaka;
-        private int stupaca;
+        private List<Polje> polja = new List<Polje>();
+        public readonly int Redaka;
+        public readonly int Stupaca;
     }
 }
