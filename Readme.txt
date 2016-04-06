@@ -1,3 +1,5 @@
+https://github.com/vsite-oom/PotapanjeBrodova.git
+
 Igra potapanja brodova
 
 Sudionici: dva igrača koji igraju jedan protiv drugoga
