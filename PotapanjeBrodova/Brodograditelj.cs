@@ -54,11 +54,21 @@ namespace PotapanjeBrodova
 
         bool ImaDovoljnoPoljaDesno(Polje p, IEnumerable<Polje> slobodnaPolja, int duljinaBroda)
         {
+            int redak = p.Redak;
+            int stupac = p.Stupac;
+            for (int s = stupac + 1; s < stupac + duljinaBroda; ++s)
+                if (!slobodnaPolja.Contains(new Polje(redak, s)))
+                    return false;
             return true;
         }
 
         bool ImaDovoljnoPoljaIspod(Polje p, IEnumerable<Polje> slobodnaPolja, int duljinaBroda)
         {
+            int redak = p.Redak;
+            int stupac = p.Stupac;
+            for (int r = redak + 1; r < redak + duljinaBroda; ++r)
+                if (!slobodnaPolja.Contains(new Polje(r, stupac)))
+                    return false;
             return true;
         }
     }
