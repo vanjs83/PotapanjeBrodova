@@ -22,12 +22,30 @@ namespace PotapanjeBrodova
                 // od mreže zatraži slobodna polja
                 var slobodnaPolja = m.DajSlobodnaPolja();
                 // izaberi početno polje za brod
+                var pp = IzaberiPočetnoPolje(slobodnaPolja, duljineBrodova[i]);
+                var pbr = DajPoljaZaBrod(pp.Item1, pp.Item2, duljineBrodova[i]);
 
                 // napravi brod i dodaj ga u flotu
 
                 // mreži kaži da eliminira polja od i oko broda
             }
             return f;
+        }
+
+        public IEnumerable<Polje> DajPoljaZaBrod(Smjer smjer, Polje početno, int duljinaBroda)
+        {
+            int redak = početno.Redak;
+            int stupac = početno.Stupac;
+            int deltaRedak = smjer == Smjer.Horizontalno ? 0 : 1;
+            int deltaStupac = smjer == Smjer.Vertikalno ? 0 : 1;
+            List<Polje> polja = new List<Polje>();
+            for (int i = 0; i < duljinaBroda; ++i)
+            {
+                polja.Add(new Polje(redak, stupac));
+                redak += deltaRedak;
+                stupac += deltaStupac;
+            }
+            return polja;
         }
 
         public Tuple<Smjer, Polje> IzaberiPočetnoPolje(IEnumerable<Polje> slobodnaPolja, int duljinaBroda)

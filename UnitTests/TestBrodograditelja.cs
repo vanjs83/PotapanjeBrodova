@@ -124,5 +124,26 @@ namespace UnitTests
             var slobodnaPolja = b.DajVertikalnaPočetnaPolja(polja, 5);
             Assert.AreEqual(0, slobodnaPolja.Count());
         }
+
+        [TestMethod]
+        public void Brodograditelj_DajPoljaZaBrodVraćaListuOd3HorizontalnaPolja()
+        {
+            Brodograditelj b = new Brodograditelj();
+            var polja = b.DajPoljaZaBrod(Smjer.Horizontalno, new Polje(3, 6), 3);
+            Assert.AreEqual(3, polja.Count());
+            Assert.IsTrue(polja.Contains(new Polje(3, 6)));
+            Assert.IsTrue(polja.Contains(new Polje(3, 7)));
+            Assert.IsTrue(polja.Contains(new Polje(3, 8)));
+        }
+
+        [TestMethod]
+        public void Brodograditelj_DajPoljaZaBrodVraćaListuOd2VertikalnaPolja()
+        {
+            Brodograditelj b = new Brodograditelj();
+            var polja = b.DajPoljaZaBrod(Smjer.Vertikalno, new Polje(3, 6), 2);
+            Assert.AreEqual(2, polja.Count());
+            Assert.IsTrue(polja.Contains(new Polje(3, 6)));
+            Assert.IsTrue(polja.Contains(new Polje(4, 6)));
+        }
     }
 }
