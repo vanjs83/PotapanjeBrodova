@@ -30,6 +30,18 @@ namespace PotapanjeBrodova
             return f;
         }
 
+        public Tuple<Smjer, Polje> IzaberiPočetnoPolje(IEnumerable<Polje> slobodnaPolja, int duljinaBroda)
+        {
+            var horizontalnaPolja = DajHorizontalnaPočetnaPolja(slobodnaPolja, duljinaBroda);
+            var vertikalnaPolja = DajVertikalnaPočetnaPolja(slobodnaPolja, duljinaBroda);
+            int ukupnoKandidata = horizontalnaPolja.Count() + vertikalnaPolja.Count();
+            Random slučajni = new Random();
+            int izbor = slučajni.Next(0, ukupnoKandidata);
+            if (izbor >= horizontalnaPolja.Count())
+                return new Tuple<Smjer, Polje>(Smjer.Vertikalno, vertikalnaPolja.ElementAt(izbor - horizontalnaPolja.Count()));
+            return new Tuple<Smjer, Polje>(Smjer.Horizontalno, horizontalnaPolja.ElementAt(izbor));
+        }
+
         public IEnumerable<Polje> DajHorizontalnaPočetnaPolja(IEnumerable<Polje> slobodnaPolja, int duljinaBroda)
         {
             List<Polje> polja = new List<Polje>();

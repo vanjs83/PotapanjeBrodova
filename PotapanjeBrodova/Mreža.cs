@@ -5,6 +5,12 @@ using System.Text;
 
 namespace PotapanjeBrodova
 {
+    public enum Smjer
+    {
+        Horizontalno,
+        Vertikalno
+    }
+
     public class Mreža
     {
         public Mreža(int redaka, int stupaca)
