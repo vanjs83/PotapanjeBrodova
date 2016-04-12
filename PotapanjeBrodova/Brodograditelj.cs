@@ -19,18 +19,44 @@ namespace PotapanjeBrodova
             // za svaku duljinu broda:
             for (int i = 0; i < duljineBrodova.Length; ++i)
             {
-                // od mreže zatraži slobodna polja
                 var slobodnaPolja = m.DajSlobodnaPolja();
-                // izaberi početno polje za brod
                 var pp = IzaberiPočetnoPolje(slobodnaPolja, duljineBrodova[i]);
                 var pbr = DajPoljaZaBrod(pp.Item1, pp.Item2, duljineBrodova[i]);
-                // napravi brod i dodaj ga u flotu
                 Brod b = new Brod(pbr);
                 f.DodajBrod(b);
-                // mreži kaži da eliminira polja od i oko broda
-
+                EliminirajPoljaOkoBroda(m, pbr);
             }
             return f;
+        }
+
+        private void EliminirajPoljaOkoBroda(Mreža mreža, IEnumerable<Polje> brodskaPolja)
+        {
+            IEnumerable<Polje> zaEliminirati = PoljaKojaTrebaEliminiratiOkoBroda(brodskaPolja, mreža.Redaka, mreža.Stupaca);
+            foreach (Polje p in zaEliminirati)
+                mreža.EliminirajPolje(p);
+        }
+
+        public IEnumerable<Polje> PoljaKojaTrebaEliminiratiOkoBroda(IEnumerable<Polje> brodskaPolja, int redaka, int stupaca)
+        {
+            List<Polje> polja = new List<Polje>();
+            int redak0 = brodskaPolja.First().Redak - 1;
+            if (redak0 < 0)
+                redak0 = 0;
+            int stupac0 = brodskaPolja.First().Stupac - 1;
+            if (stupac0 < 0)
+                stupac0 = 0;
+            int redak1 = brodskaPolja.Last().Redak + 1;
+            if (redak1 >= redaka)
+                redak1 = redaka - 1;
+            int stupac1 = brodskaPolja.Last().Stupac + 1;
+            if (stupac1 >= stupaca)
+                stupac1 = stupaca - 1;
+            for (int r = redak0; r <= redak1; ++r)
+            {
+                for (int s = stupac0; s <= stupac1; ++s)
+                    polja.Add(new Polje(r, s));
+            }
+            return polja;
         }
 
         public IEnumerable<Polje> DajPoljaZaBrod(Smjer smjer, Polje početno, int duljinaBroda)
