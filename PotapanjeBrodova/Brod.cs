@@ -12,6 +12,11 @@ namespace PotapanjeBrodova
             this.polja = polja;
         }
 
+        public int Duljina
+        {
+            get { return polja.Count(); }
+        }
+
         public readonly IEnumerable<Polje> polja;
     }
 }
