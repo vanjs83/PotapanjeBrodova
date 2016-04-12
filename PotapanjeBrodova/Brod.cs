@@ -9,14 +9,14 @@ namespace PotapanjeBrodova
     {
         public Brod(IEnumerable<Polje> polja)
         {
-            this.polja = polja;
+            this.Polja = polja;
         }
 
         public int Duljina
         {
-            get { return polja.Count(); }
+            get { return Polja.Count(); }
         }
 
-        public readonly IEnumerable<Polje> polja;
+        public readonly IEnumerable<Polje> Polja;
     }
 }
