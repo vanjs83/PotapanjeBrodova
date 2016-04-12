@@ -11,7 +11,7 @@ using PotapanjeBrodova;
 
 namespace PrikazFlote
 {
-    public partial class MrežaZaFlotu : PictureBox
+    public partial class MrežaZaFlotu : Control
     {
         public MrežaZaFlotu()
         {

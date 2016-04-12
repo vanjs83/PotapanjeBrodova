@@ -30,7 +30,6 @@
         {
             this.buttonSložiFlotu = new System.Windows.Forms.Button();
             this.mrežaZaFlotu = new PrikazFlote.MrežaZaFlotu();
-            ((System.ComponentModel.ISupportInitialize)(this.mrežaZaFlotu)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonSložiFlotu
@@ -49,32 +48,30 @@
             this.mrežaZaFlotu.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.mrežaZaFlotu.BackColor = System.Drawing.SystemColors.Control;
             this.mrežaZaFlotu.Location = new System.Drawing.Point(12, 12);
             this.mrežaZaFlotu.Name = "mrežaZaFlotu";
-            this.mrežaZaFlotu.Size = new System.Drawing.Size(427, 404);
-            this.mrežaZaFlotu.TabIndex = 0;
-            this.mrežaZaFlotu.TabStop = false;
+            this.mrežaZaFlotu.Size = new System.Drawing.Size(427, 406);
+            this.mrežaZaFlotu.TabIndex = 2;
+            this.mrežaZaFlotu.Text = "mrežaZaFlotu";
             // 
             // FormFlota
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(451, 471);
-            this.Controls.Add(this.buttonSložiFlotu);
             this.Controls.Add(this.mrežaZaFlotu);
+            this.Controls.Add(this.buttonSložiFlotu);
             this.DoubleBuffered = true;
             this.Name = "FormFlota";
             this.Text = "Slaganje flote";
-            ((System.ComponentModel.ISupportInitialize)(this.mrežaZaFlotu)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private MrežaZaFlotu mrežaZaFlotu;
         private System.Windows.Forms.Button buttonSložiFlotu;
+        private MrežaZaFlotu mrežaZaFlotu;
     }
 }
 
