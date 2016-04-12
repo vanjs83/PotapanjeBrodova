@@ -24,10 +24,11 @@ namespace PotapanjeBrodova
                 // izaberi početno polje za brod
                 var pp = IzaberiPočetnoPolje(slobodnaPolja, duljineBrodova[i]);
                 var pbr = DajPoljaZaBrod(pp.Item1, pp.Item2, duljineBrodova[i]);
-
                 // napravi brod i dodaj ga u flotu
-
+                Brod b = new Brod(pbr);
+                f.DodajBrod(b);
                 // mreži kaži da eliminira polja od i oko broda
+
             }
             return f;
         }

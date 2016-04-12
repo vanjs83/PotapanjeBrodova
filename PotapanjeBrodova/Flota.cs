@@ -7,5 +7,16 @@ namespace PotapanjeBrodova
 {
     public class Flota
     {
+        public void DodajBrod(Brod b)
+        {
+            brodovi.Add(b);
+        }
+
+        public IEnumerable<Brod> Brodovi
+        {
+            get { return brodovi; }
+        }
+
+        List<Brod> brodovi = new List<Brod>();
     }
 }
