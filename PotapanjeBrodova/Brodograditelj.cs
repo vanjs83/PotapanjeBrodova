@@ -13,19 +13,30 @@ namespace PotapanjeBrodova
 
         public Flota SložiFlotu(int redaka, int stupaca, int[] duljineBrodova)
         {
-            Flota f = new Flota();
-            // napravi mrežu
-            Mreža m = new Mreža(redaka, stupaca);
-            // za svaku duljinu broda:
-            for (int i = 0; i < duljineBrodova.Length; ++i)
+            Flota f = null;
+            Mreža m = null;
+            do
             {
-                var slobodnaPolja = m.DajSlobodnaPolja();
-                var pp = IzaberiPočetnoPolje(slobodnaPolja, duljineBrodova[i]);
-                var pbr = DajPoljaZaBrod(pp.Item1, pp.Item2, duljineBrodova[i]);
-                Brod b = new Brod(pbr);
-                f.DodajBrod(b);
-                EliminirajPoljaOkoBroda(m, pbr);
-            }
+                f = new Flota();
+                // napravi mrežu
+                m = new Mreža(redaka, stupaca);
+                // za svaku duljinu broda:
+                for (int i = 0; i < duljineBrodova.Length; ++i)
+                {
+                    var slobodnaPolja = m.DajSlobodnaPolja();
+                    var pp = IzaberiPočetnoPolje(slobodnaPolja, duljineBrodova[i]);
+                    if (pp == null)
+                    {
+                        m = null;
+                        break;
+                    }
+                    var pbr = DajPoljaZaBrod(pp.Item1, pp.Item2, duljineBrodova[i]);
+                    Brod b = new Brod(pbr);
+                    f.DodajBrod(b);
+                    EliminirajPoljaOkoBroda(m, pbr);
+                }
+            } while (m == null);
+
             return f;
         }
 
@@ -80,7 +91,8 @@ namespace PotapanjeBrodova
             var horizontalnaPolja = DajHorizontalnaPočetnaPolja(slobodnaPolja, duljinaBroda);
             var vertikalnaPolja = DajVertikalnaPočetnaPolja(slobodnaPolja, duljinaBroda);
             int ukupnoKandidata = horizontalnaPolja.Count() + vertikalnaPolja.Count();
-            Random slučajni = new Random();
+            if (ukupnoKandidata == 0)
+                return null;
             int izbor = slučajni.Next(0, ukupnoKandidata);
             if (izbor >= horizontalnaPolja.Count())
                 return new Tuple<Smjer, Polje>(Smjer.Vertikalno, vertikalnaPolja.ElementAt(izbor - horizontalnaPolja.Count()));
@@ -128,5 +140,7 @@ namespace PotapanjeBrodova
                     return false;
             return true;
         }
+
+        Random slučajni = new Random();
     }
 }
