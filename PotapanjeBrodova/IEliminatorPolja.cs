@@ -7,6 +7,6 @@ namespace PotapanjeBrodova
 {
     public interface IEliminatorPolja
     {
-        IEnumerable<Polje> PoljaKojaTrebaEliminiratiOkoBroda(IEnumerable<Polje> brodskaPolja, int redaka, int stupaca);
+        IEnumerable<Polje> PoljaKojaTrebaUklonitiOkoBroda(IEnumerable<Polje> brodskaPolja, int redaka, int stupaca);
     }
 }

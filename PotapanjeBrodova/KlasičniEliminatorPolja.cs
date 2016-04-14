@@ -7,7 +7,7 @@ namespace PotapanjeBrodova
 {
     public class KlasičniEliminatorPolja : IEliminatorPolja
     {
-        public IEnumerable<Polje> PoljaKojaTrebaEliminiratiOkoBroda(IEnumerable<Polje> brodskaPolja, int redaka, int stupaca)
+        public IEnumerable<Polje> PoljaKojaTrebaUklonitiOkoBroda(IEnumerable<Polje> brodskaPolja, int redaka, int stupaca)
         {
             List<Polje> polja = new List<Polje>();
             int redak0 = brodskaPolja.First().Redak - 1;

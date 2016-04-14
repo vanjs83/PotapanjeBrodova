@@ -36,7 +36,7 @@ namespace PotapanjeBrodova
                         m = null;
                         break;
                     }
-                    var pbr = Mreža.DajPoljaZaBrod(pp.Item1, pp.Item2, duljineBrodova[i]);
+                    var pbr = m.DajPoljaZaBrod(pp.Item1, pp.Item2, duljineBrodova[i]);
                     Brod b = new Brod(pbr);
                     f.DodajBrod(b);
                     EliminirajPoljaOkoBroda(m, pbr);
@@ -48,7 +48,7 @@ namespace PotapanjeBrodova
 
         private void EliminirajPoljaOkoBroda(Mreža mreža, IEnumerable<Polje> brodskaPolja)
         {
-            IEnumerable<Polje> zaEliminirati = eliminatorPolja.PoljaKojaTrebaEliminiratiOkoBroda(brodskaPolja, mreža.Redaka, mreža.Stupaca);
+            IEnumerable<Polje> zaEliminirati = eliminatorPolja.PoljaKojaTrebaUklonitiOkoBroda(brodskaPolja, mreža.Redaka, mreža.Stupaca);
             foreach (Polje p in zaEliminirati)
                 mreža.EliminirajPolje(p);
         }

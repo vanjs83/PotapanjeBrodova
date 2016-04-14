@@ -126,26 +126,6 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void Brodograditelj_DajPoljaZaBrodVraćaListuOd3HorizontalnaPolja()
-        {
-            var polja = Mreža.DajPoljaZaBrod(Smjer.Horizontalno, new Polje(3, 6), 3);
-            Assert.AreEqual(3, polja.Count());
-            Assert.IsTrue(polja.Contains(new Polje(3, 6)));
-            Assert.IsTrue(polja.Contains(new Polje(3, 7)));
-            Assert.IsTrue(polja.Contains(new Polje(3, 8)));
-        }
-
-        [TestMethod]
-        public void Brodograditelj_DajPoljaZaBrodVraćaListuOd2VertikalnaPolja()
-        {
-            var polja = Mreža.DajPoljaZaBrod(Smjer.Vertikalno, new Polje(3, 6), 2);
-            Assert.AreEqual(2, polja.Count());
-            Assert.IsTrue(polja.Contains(new Polje(3, 6)));
-            Assert.IsTrue(polja.Contains(new Polje(4, 6)));
-        }
-
-
-        [TestMethod]
         public void Brodograditelj_SložiFlotuVraćaFlotuSaZadanimBrojemBrodova()
         {
             int redaka = 10;
