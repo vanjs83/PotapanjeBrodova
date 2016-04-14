@@ -19,31 +19,34 @@ namespace PotapanjeBrodova
 
         public Flota SložiFlotu(int redaka, int stupaca, int[] duljineBrodova)
         {
-            Flota f = null;
-            Mreža m = null;
-            do
+            const int brojPokušaja = 5;
+            for (int i = 0; i < brojPokušaja; ++i)
             {
-                f = new Flota();
-                // napravi mrežu
-                m = new Mreža(redaka, stupaca);
-                // za svaku duljinu broda:
-                for (int i = 0; i < duljineBrodova.Length; ++i)
+                try
                 {
-                    var slobodnaPolja = m.DajSlobodnaPolja();
-                    var pp = IzaberiPočetnoPolje(slobodnaPolja, duljineBrodova[i]);
-                    if (pp == null)
-                    {
-                        m = null;
-                        break;
-                    }
-                    var pbr = m.DajPoljaZaBrod(pp.Item1, pp.Item2, duljineBrodova[i]);
-                    Brod b = new Brod(pbr);
-                    f.DodajBrod(b);
-                    EliminirajPoljaOkoBroda(m, pbr);
+                    Mreža mreža = new Mreža(redaka, stupaca);
+                    return SložiBrodove(duljineBrodova, mreža);
                 }
-            } while (m == null);
+                catch (ApplicationException) { }
+            }
+            // ako ne uspije složiti niti nakon 5 pokušaja, baca iznimku
+            throw new ApplicationException();
+        }
 
-            return f;
+        private Flota SložiBrodove(int[] duljineBrodova, Mreža mreža)
+        {
+            Flota flota = new Flota();
+            // za svaku duljinu broda:
+            for (int i = 0; i < duljineBrodova.Length; ++i)
+            {
+                var slobodnaPolja = mreža.DajSlobodnaPolja();
+                var pp = IzaberiPočetnoPolje(slobodnaPolja, duljineBrodova[i]);
+                var pbr = mreža.DajPoljaZaBrod(pp.Smjer, pp.Polje, duljineBrodova[i]);
+                Brod b = new Brod(pbr);
+                flota.DodajBrod(b);
+                EliminirajPoljaOkoBroda(mreža, pbr);
+            }
+            return flota;
         }
 
         private void EliminirajPoljaOkoBroda(Mreža mreža, IEnumerable<Polje> brodskaPolja)
@@ -53,17 +56,29 @@ namespace PotapanjeBrodova
                 mreža.EliminirajPolje(p);
         }
 
-        public Tuple<Smjer, Polje> IzaberiPočetnoPolje(IEnumerable<Polje> slobodnaPolja, int duljinaBroda)
+        // pomoćna klasa koja pojednostavnjuje korištenje rezultata metode IzaberiPočetnoPolje.
+        private class PoljeSmjer
+        {
+            public PoljeSmjer(Smjer smjer, Polje polje)
+            {
+                Smjer = smjer;
+                Polje = polje;
+            }
+            public readonly Polje Polje;
+            public readonly Smjer Smjer;
+        }
+
+        private PoljeSmjer IzaberiPočetnoPolje(IEnumerable<Polje> slobodnaPolja, int duljinaBroda)
         {
             var horizontalnaPolja = DajHorizontalnaPočetnaPolja(slobodnaPolja, duljinaBroda);
             var vertikalnaPolja = DajVertikalnaPočetnaPolja(slobodnaPolja, duljinaBroda);
             int ukupnoKandidata = horizontalnaPolja.Count() + vertikalnaPolja.Count();
             if (ukupnoKandidata == 0)
-                return null;
+                throw new ApplicationException();
             int izbor = slučajni.Next(0, ukupnoKandidata);
             if (izbor >= horizontalnaPolja.Count())
-                return new Tuple<Smjer, Polje>(Smjer.Vertikalno, vertikalnaPolja.ElementAt(izbor - horizontalnaPolja.Count()));
-            return new Tuple<Smjer, Polje>(Smjer.Horizontalno, horizontalnaPolja.ElementAt(izbor));
+                return new PoljeSmjer(Smjer.Vertikalno, vertikalnaPolja.ElementAt(izbor - horizontalnaPolja.Count()));
+            return new PoljeSmjer(Smjer.Horizontalno, horizontalnaPolja.ElementAt(izbor));
         }
 
         public IEnumerable<Polje> DajHorizontalnaPočetnaPolja(IEnumerable<Polje> slobodnaPolja, int duljinaBroda)
