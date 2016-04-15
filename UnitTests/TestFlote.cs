@@ -12,7 +12,7 @@ namespace UnitTests
     public class TestFlote
     {
         [TestMethod]
-        public void Flota_DodajBrodaTriRazličitaBrodaSlažeFlotuOdTriBroda()
+        public void Flota_DodajBrodZaTriRazličitaBrodaSlažeFlotuOdTriBroda()
         {
             Mreža m = new Mreža(10, 10);
             Flota f = new Flota();
