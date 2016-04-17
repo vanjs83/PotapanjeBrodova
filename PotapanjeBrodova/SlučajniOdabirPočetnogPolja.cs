@@ -21,21 +21,20 @@ namespace PotapanjeBrodova
 
         public IEnumerable<Polje> DajHorizontalnaPočetnaPolja(IEnumerable<Polje> slobodnaPolja, int duljinaBroda)
         {
-            List<Polje> polja = new List<Polje>();
-            foreach (Polje p in slobodnaPolja)
-            {
-                if (ImaDovoljnoPoljaDesno(p, slobodnaPolja, duljinaBroda))
-                    polja.Add(p);
-            }
-            return polja;
+            return DajPočetnaPolja(ImaDovoljnoPoljaDesno, slobodnaPolja, duljinaBroda);
         }
 
         public IEnumerable<Polje> DajVertikalnaPočetnaPolja(IEnumerable<Polje> slobodnaPolja, int duljinaBroda)
         {
+            return DajPočetnaPolja(ImaDovoljnoPoljaIspod, slobodnaPolja, duljinaBroda);
+        }
+
+        private IEnumerable<Polje> DajPočetnaPolja(Func<Polje, IEnumerable<Polje>, int, bool> funkcija, IEnumerable<Polje> slobodnaPolja, int duljinaBroda)
+        {
             List<Polje> polja = new List<Polje>();
             foreach (Polje p in slobodnaPolja)
             {
-                if (ImaDovoljnoPoljaIspod(p, slobodnaPolja, duljinaBroda))
+                if (funkcija(p, slobodnaPolja, duljinaBroda))
                     polja.Add(p);
             }
             return polja;
