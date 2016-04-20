@@ -12,7 +12,7 @@ namespace UnitTests
         {
             Polje[] polja = { new Polje(1, 2), new Polje(1, 3), new Polje(1, 4) };
             Brod b = new Brod(polja);
-            Assert.Equals(RezultatGađanja.Promašaj, b.Gađaj(new Polje(2, 3)));
+            Assert.AreEqual(RezultatGađanja.Promašaj, b.Gađaj(new Polje(2, 3)));
         }
 
         [TestMethod]
@@ -20,7 +20,7 @@ namespace UnitTests
         {
             Polje[] polja = { new Polje(1, 2), new Polje(1, 3), new Polje(1, 4) };
             Brod b = new Brod(polja);
-            Assert.Equals(RezultatGađanja.Pogodak, b.Gađaj(new Polje(1, 2)));
+            Assert.AreEqual(RezultatGađanja.Pogodak, b.Gađaj(new Polje(1, 2)));
         }
 
         [TestMethod]
@@ -28,18 +28,18 @@ namespace UnitTests
         {
             Polje[] polja = { new Polje(1, 2), new Polje(1, 3), new Polje(1, 4) };
             Brod b = new Brod(polja);
-            Assert.Equals(RezultatGađanja.Pogodak, b.Gađaj(new Polje(1, 2)));
-            Assert.Equals(RezultatGađanja.Pogodak, b.Gađaj(new Polje(1, 4)));
-            Assert.Equals(RezultatGađanja.Potonuće, b.Gađaj(new Polje(1, 3)));
+            Assert.AreEqual(RezultatGađanja.Pogodak, b.Gađaj(new Polje(1, 2)));
+            Assert.AreEqual(RezultatGađanja.Pogodak, b.Gađaj(new Polje(1, 4)));
+            Assert.AreEqual(RezultatGađanja.Potonuće, b.Gađaj(new Polje(1, 3)));
         }
 
         [TestMethod]
-        public void Brod_GađajVraćaPogodakZaPoljeKojeJePonvnoPogođeno()
+        public void Brod_GađajVraćaPogodakZaPoljeKojeJePonovnoPogođeno()
         {
             Polje[] polja = { new Polje(1, 2), new Polje(1, 3), new Polje(1, 4) };
             Brod b = new Brod(polja);
-            Assert.Equals(RezultatGađanja.Pogodak, b.Gađaj(new Polje(1, 2)));
-            Assert.Equals(RezultatGađanja.Pogodak, b.Gađaj(new Polje(1, 2)));
+            Assert.AreEqual(RezultatGađanja.Pogodak, b.Gađaj(new Polje(1, 2)));
+            Assert.AreEqual(RezultatGađanja.Pogodak, b.Gađaj(new Polje(1, 2)));
         }
 
         [TestMethod]
@@ -47,10 +47,10 @@ namespace UnitTests
         {
             Polje[] polja = { new Polje(1, 2), new Polje(1, 3), new Polje(1, 4) };
             Brod b = new Brod(polja);
-            Assert.Equals(RezultatGađanja.Pogodak, b.Gađaj(new Polje(1, 2)));
-            Assert.Equals(RezultatGađanja.Pogodak, b.Gađaj(new Polje(1, 4)));
-            Assert.Equals(RezultatGađanja.Potonuće, b.Gađaj(new Polje(1, 3)));
-            Assert.Equals(RezultatGađanja.Potonuće, b.Gađaj(new Polje(1, 4)));
+            Assert.AreEqual(RezultatGađanja.Pogodak, b.Gađaj(new Polje(1, 2)));
+            Assert.AreEqual(RezultatGađanja.Pogodak, b.Gađaj(new Polje(1, 4)));
+            Assert.AreEqual(RezultatGađanja.Potonuće, b.Gađaj(new Polje(1, 3)));
+            Assert.AreEqual(RezultatGađanja.Potonuće, b.Gađaj(new Polje(1, 4)));
         }
     }
 }
