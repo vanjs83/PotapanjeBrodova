@@ -51,7 +51,7 @@ namespace UnitTests
             t.ObradiGađanje(RezultatGađanja.Promašaj);
             Assert.AreEqual(TaktikaGađanja.Okruživanje, t.TrenutnaTaktika);
             t.ObradiGađanje(RezultatGađanja.Pogodak);
-            // nakon drugog pogtka je SustavnoUništavanje
+            // nakon drugog pogotka je SustavnoUništavanje
             t.ObradiGađanje(RezultatGađanja.Promašaj);
             Assert.AreEqual(TaktikaGađanja.SustavnoUništavanje, t.TrenutnaTaktika);
         }
