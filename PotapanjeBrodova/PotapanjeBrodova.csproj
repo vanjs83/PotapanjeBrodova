@@ -44,8 +44,10 @@
     <Compile Include="Flota.cs" />
     <Compile Include="IEliminatorPolja.cs" />
     <Compile Include="IOdabirPočetnogPoljaZaBrod.cs" />
+    <Compile Include="IPucač.cs" />
     <Compile Include="KlasičniEliminatorPolja.cs" />
     <Compile Include="Mreža.cs" />
+    <Compile Include="Napipač.cs" />
     <Compile Include="Polje.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SlučajniOdabirPočetnogPolja.cs" />
