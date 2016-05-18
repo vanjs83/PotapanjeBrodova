@@ -23,13 +23,13 @@ namespace PotapanjeBrodova
             {
                 kandidati.Add(mreža.DajPoljaUZadanomSmjeru(redak, stupac, smjer));
             }
-            kandidati.Sort(lista1, lista2) => lista2.Count() - lista1.Count());
+            kandidati.Sort((lista1, lista2) => lista2.Count() - lista1.Count());
             var grupe = kandidati.GroupBy(lista => lista.Count());
             var najdulji = grupe.First();
             if (najdulji.Count() == 1)
                 return najdulji.First().First();
             int indeks = slučajni.Next(najdulji.Count());
-            najdulji.ElementAt(indeks).First();
+            return najdulji.ElementAt(indeks).First();
         }
 
         Polje prvoPogođeno;
